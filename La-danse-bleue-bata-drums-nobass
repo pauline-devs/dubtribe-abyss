@@ -1,0 +1,68 @@
+# La Danse Bleue
+# BATA DRUMS
+
+# Elegguáエレグア - Lumbanche
+# Elegguáエレグア - Lumbanche // no-bass
+
+use_bpm 95
+cmaster1 = 130
+
+#base architecture
+define :pattern do |pattern|
+  return pattern.ring.tick == "x"
+end
+
+live_loop :ghost do
+  sleep 1
+end
+
+# okonkolo
+live_loop :okonkolo_tonique, sync: :ghost do
+  a = 1.5
+  sample :tabla_ghe4 , amp: a, cutoff: cmaster1 if pattern "x--x--"
+  sleep 0.25
+end
+
+live_loop :okonkolo_slap, sync: :ghost do
+  a = 1.5
+  with_fx :krush do
+    sample :elec_twip , amp: a,  pan: -0.4, cutoff: cmaster1 if pattern "-x--x-"
+    
+  end
+  sleep 0.25
+end
+
+# itotele
+live_loop :itotele_tonique, sync: :ghost do
+  a = 2
+  sample :hat_hier , amp: a, pan: 0.7, cutoff: cmaster1 if pattern "-x----"
+  sleep 0.25
+end
+
+live_loop :itotele_slap, sync: :ghost do
+  a = 2.5
+  with_fx :bitcrusher do
+    with_fx :ixi_techno do
+      sample :tabla_dhec, decay: 0.3, pan: 0.8, amp: a, cutoff: cmaster1 if pattern "-x-x-x"
+    end
+  end
+  sleep 0.25
+end
+
+live_loop :itotele_bass, sync: :ghost do
+  a = 2
+  sample :bd_klub, amp: a, cutoff: cmaster1 if pattern "-x-x-x"
+  sleep 0.25
+end
+
+live_loop :mosca_bass, sync: :ghost do
+  a = 2
+  sample :bd_klub, pan: 0.3, amp: a, cutoff: cmaster1 if pattern "x---x---"
+  sleep 0.25
+end
+
+live_loop :mosca_sex, sync: :ghost do
+  a = 2
+  sample :hat_hier, amp: a, pan: -0.4, cutoff: cmaster1 if pattern "-xx---x-"
+  sleep 0.25
+end
